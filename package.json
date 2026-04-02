@@ -1,7 +1,7 @@
 {
   "name": "release-cli",
   "description": "一个跨平台 CLI，用来创建或初始化发布流程模板。",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "MingLL",
   "bin": {
     "release-cli": "./bin/run.js"
