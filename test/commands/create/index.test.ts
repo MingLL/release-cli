@@ -1,7 +1,7 @@
 import {runCommand} from '@oclif/test'
 import {expect} from 'chai'
 import {constants} from 'node:fs'
-import {access, mkdtemp, stat} from 'node:fs/promises'
+import {access, mkdtemp, readFile, stat} from 'node:fs/promises'
 import {tmpdir} from 'node:os'
 import path from 'node:path'
 
@@ -39,5 +39,40 @@ describe('create', () => {
 
     expect(stdout).to.contain('写入完成')
     await access(path.join(projectDir, '.github', 'workflows', 'release.yml'), constants.F_OK)
+  })
+
+  it('renders workflow with custom package manager, branch, node version and optional steps', async () => {
+    const baseDir = await mkdtemp(path.join(tmpdir(), 'release-cli-create-custom-'))
+    const projectDir = path.join(baseDir, 'demo-app')
+
+    await runCommand(
+      [
+        'create',
+        '--yes',
+        '--platform github',
+        '--stack node',
+        '--name demo-app',
+        `--target-dir ${projectDir}`,
+        '--package-manager pnpm',
+        '--branch develop',
+        '--node-version 22',
+        '--with-lint',
+        '--with-build',
+      ].join(' '),
+    )
+
+    const workflow = await readFile(path.join(projectDir, '.github', 'workflows', 'release.yml'), 'utf8')
+    expect(workflow).to.contain('branches:')
+    expect(workflow).to.contain('- develop')
+    expect(workflow).to.contain('node-version: 22')
+    expect(workflow).to.contain('run: pnpm install --frozen-lockfile')
+    expect(workflow).to.contain('run: pnpm test')
+    expect(workflow).to.contain('run: pnpm lint')
+    expect(workflow).to.contain('run: pnpm build')
+  })
+
+  it('fails when package manager is unsupported', async () => {
+    const {error} = await runCommand('create --yes --platform github --stack node --name demo-app --package-manager bun')
+    expect(error?.message ?? '').to.contain('当前仅支持 package-manager=npm|pnpm|yarn')
   })
 })
