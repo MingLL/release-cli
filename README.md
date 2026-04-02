@@ -20,7 +20,7 @@ $ npm install -g release-cli
 $ release-cli COMMAND
 running command...
 $ release-cli (--version)
-release-cli/0.0.0 darwin-x64 node-v24.12.0
+release-cli/0.0.0 linux-x64 node-v20.20.1
 $ release-cli --help [COMMAND]
 USAGE
   $ release-cli COMMAND
@@ -29,8 +29,6 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`release-cli hello PERSON`](#release-cli-hello-person)
-* [`release-cli hello world`](#release-cli-hello-world)
 * [`release-cli help [COMMAND]`](#release-cli-help-command)
 * [`release-cli plugins`](#release-cli-plugins)
 * [`release-cli plugins add PLUGIN`](#release-cli-plugins-add-plugin)
@@ -42,48 +40,6 @@ USAGE
 * [`release-cli plugins uninstall [PLUGIN]`](#release-cli-plugins-uninstall-plugin)
 * [`release-cli plugins unlink [PLUGIN]`](#release-cli-plugins-unlink-plugin)
 * [`release-cli plugins update`](#release-cli-plugins-update)
-
-## `release-cli hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ release-cli hello PERSON -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ release-cli hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [src/commands/hello/index.ts](https://github.com/MingLL/release-cli/https://github.com/MingLL/release-cli/blob/v0.0.0/src/commands/hello/index.ts)_
-
-## `release-cli hello world`
-
-Say hello world
-
-```
-USAGE
-  $ release-cli hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ release-cli hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-_See code: [src/commands/hello/world.ts](https://github.com/MingLL/release-cli/https://github.com/MingLL/release-cli/blob/v0.0.0/src/commands/hello/world.ts)_
 
 ## `release-cli help [COMMAND]`
 
