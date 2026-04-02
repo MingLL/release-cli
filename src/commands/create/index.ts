@@ -39,7 +39,7 @@ export default class Create extends Command {
       throw new Error('当前仅支持 stack=node')
     }
 
-    const paths = await resolveTemplatePath(options.platform, options.stack)
+    const paths = await resolveTemplatePath(options.platform, options.stack, this.config.root)
     const variables = {
       projectName: options.name,
       targetDirName: path.basename(options.targetDir),
